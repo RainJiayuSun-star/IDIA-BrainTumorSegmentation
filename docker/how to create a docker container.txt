@@ -1,0 +1,15 @@
+# (wsl2) run a container, accessible to c and d drive, using nvidia container (minimal)
+docker run --gpus all -it \
+  --name brain_container \
+  -v /mnt/c:/mnt/c \
+  -v /mnt/d:/mnt/d \
+  nvidia/cuda:12.3.2-base-ubuntu22.04 \
+  bash
+
+# (wsl2) run a container, accessible to c and d drive, pytorch container from nvidia
+docker run --gpus all -it \
+  --name brain_container \
+  -v /mnt/c:/mnt/c \
+  -v /mnt/d:/mnt/d \
+  nvcr.io/nvidia/pytorch:24.03-py3 \
+  bash
