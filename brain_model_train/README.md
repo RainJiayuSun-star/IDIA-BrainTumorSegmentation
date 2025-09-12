@@ -18,6 +18,9 @@ pip install -r requirements.txt
 
 ## Data
 
+### Notice
+Here, we replace the data part with our own data. The following steps are for people who don't have data to try to train a model. 
+
 ### Download Data
 If you have the nifti files already, you can skip this step and move onto the **Prepare Data** step. Otherwise, you will have to download the data.
 
@@ -108,3 +111,4 @@ Once you have set up your configuration, run the training script, which will uti
 python3 segmetation/main.py
 ```
 You can view the results in your weights and biases dashboard under the project name.
+
