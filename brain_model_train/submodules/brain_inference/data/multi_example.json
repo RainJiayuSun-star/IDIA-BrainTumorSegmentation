@@ -1,0 +1,24 @@
+{
+    "training": [
+        {
+            "fold": 1,
+            "label": "UCSF-PDGM-0444_tumor_segmentation.nii.gz",
+            "image": [
+                "UCSF-PDGM-0444_FLAIR_bias.nii.gz",
+                "UCSF-PDGM-0444_T1c_bias.nii.gz",
+                "UCSF-PDGM-0444_T1.nii.gz",
+                "UCSF-PDGM-0444_T2_bias.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "label": "UCSF-PDGM-0445_tumor_segmentation.nii.gz",
+            "image": [
+                "UCSF-PDGM-0445_FLAIR_bias.nii.gz",
+                "UCSF-PDGM-0445_T1c_bias.nii.gz",
+                "UCSF-PDGM-0445_T1.nii.gz",
+                "UCSF-PDGM-0445_T2_bias.nii.gz"
+            ]
+        }
+    ]
+}

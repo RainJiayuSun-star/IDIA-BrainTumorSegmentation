@@ -1,0 +1,6 @@
+einops
+monai[nibabel]
+omegaconf
+boto3
+smart_open
+tqdm

@@ -1,0 +1,42 @@
+data_root: '/app/train/trainMain/data/UCSF-POST/'
+folds: 5
+
+datasets:
+  UCSF:
+    base_path: 'Preprocessed/'
+    patient_pattern: '100[0-9][0-9][0-9]'
+    label_pattern: '{patient}_time1_seg.nii.gz'
+    image_patterns:
+      FLAIR: '{patient}_time1_flair.nii.gz'
+      T1c: '{patient}_time1_t1ce.nii.gz'
+      T1: '{patient}_time1_t1.nii.gz'
+      T2: '{patient}_time1_t2.nii.gz'
+#  CCF:
+#    base_path: 'CCF/Preprocessed'
+#    patient_pattern: '[0-9][0-9]/Baseline'
+#    label_pattern: '{patient}_*[Aa]ll-[Ll]abel_SRI24_brats.nii.gz'
+#    image_patterns:
+#      FLAIR: '{patient}_FLAIR_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T1c: '{patient}_T1c_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T1: '{patient}_T1_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T2: '{patient}_T2_SRI24_SkullS_BiasCorrect.nii.gz'
+
+#  IVYGAP:
+#    base_path: 'IVYGAP/Preprocessed'
+#    patient_pattern: 'W[0-9][0-9]/Baseline'
+#    label_pattern: '{patient}_01_All_label_brats_SRI24.nii.gz'
+#    image_patterns:
+#      FLAIR: '{patient}_FLAIR_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T1c: '{patient}_T1c_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T1: '{patient}_T1_SRI24_SkullS_BiasCorrect.nii.gz'
+#      T2: '{patient}_T2_SRI24_SkullS_BiasCorrect.nii.gz'
+
+#  LUMIERE:
+#    base_path: 'LUMIERE/Preprocessed'
+#    patient_pattern: 'Patient-[0-9][0-9][0-9]/Baseline'
+#    label_pattern: '{patient}_01_tumor_segmentation_brats_SRI24.nii.gz'
+#    image_patterns:
+#      FLAIR: '{patient}_FLAIR_SRI24_BiasCorrect.nii.gz'
+#      T1c: '{patient}_CT1_SRI24_BiasCorrect.nii.gz'
+#      T1: '{patient}_T1_SRI24_BiasCorrect.nii.gz'
+#      T2: '{patient}_T2_SRI24_BiasCorrect.nii.gz'

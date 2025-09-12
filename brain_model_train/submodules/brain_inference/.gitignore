@@ -1,0 +1,11 @@
+.venv
+*.nii.gz
+__pypackages__/
+.ipynb_checkpoints
+__pycache__/
+*.ckpt
+artifacts/
+config/test_config.yaml
+
+data/*
+!data/multi_example.json

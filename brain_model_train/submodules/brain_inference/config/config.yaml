@@ -1,0 +1,15 @@
+input:
+  single_scan:            # For a single scan, define the locations of all .nii.gz modalities relative to data_dir. 
+    flair:        "UCSF-PDGM-0005_FLAIR_bias.nii.gz"
+    t1c:          "UCSF-PDGM-0005_T1c_bias.nii.gz"
+    t1:           "UCSF-PDGM-0005_T1_bias.nii.gz"
+    t2:           "UCSF-PDGM-0005_T2_bias.nii.gz"
+  data_dir:       "/home/slicer/data/bric/UCSF-PDGM/UCSF-PDGM-v3/UCSF-PDGM-0005_nifti/" # The directory where input scans are located. 
+
+output:                   # File path to the output inference. 
+  file_path: "out/segmentation_mask.nii.gz"
+
+model:                    # AWS S3 details for retrieving the model. 
+  bucket:            "theta-trained-models"
+  key:               "glioblastoma.ckpt"
+  region:            "us-east-1"

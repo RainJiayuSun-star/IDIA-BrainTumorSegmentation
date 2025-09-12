@@ -1,0 +1,8 @@
+monai[nibabel]
+pytorch-lightning
+wandb
+omegaconf
+hydra-core
+einops
+pillow
+boto3

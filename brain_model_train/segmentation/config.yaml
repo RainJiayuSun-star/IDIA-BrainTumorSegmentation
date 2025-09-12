@@ -1,0 +1,65 @@
+project_name: "RADCAD-BRAIN-MONAI-SWIN-UNETR"
+wandb_enabled: True
+
+# See documentation for SwinUNETR in Project Monai for what these mean
+hyperparameter:
+  roi:
+    h: 224
+    w: 224
+    d: 96
+  feature_size: 24 # This is the dimension of the embedding space. The embedding is a linear transformation mapping image patches to a space of size feature_size before the swin blocks.
+  drop_rate: 0.01 # Dropout applied to the feature vectors in the embedding space. Randomly sets this proportion of elements to 0 during training. 
+  attn_drop_rate: 0.01 # Dropout applied directly to attention weights. Randomly sets this proportion of attention weights to 0 during training. 
+  dropout_path_rate: 0.01 # Rate of stochastic depth, which is a regularization technique that randomly skips this proportion of layers in swin blocks during training. 
+  infer_overlap: 0.7 # Amount of overlap between scans along each spatial dimension during sliding-window inference. 
+  loss:
+    _target_: monai.losses.DiceLoss # the loss function name, from https://docs.monai.io/en/stable/losses.html
+    to_onehot_y: False # define loss function args here
+    sigmoid: True
+  depths: [2, 2, 2, 2] # In stage i, this will create depths[i] transformer blocks in that stage. These are applied sequentially in the forward pass. 
+  num_heads: [3, 6, 6, 6] # In stage i, num_heads[i] is the number of attention heads in MSA to be used by each transformer block in that stage. 
+  norm_name: "instance" 
+  # Norm_name is the normalization method applied to conv/up-conv blocks. Should be one of
+  # "instance"          - Instance normalization layer
+  # "batch"             - Batch normalization layer
+  # "instance_nvfuser"  - Faster version of instance normalization
+  normalize: True # If true, will apply layer norm between each swin transformer stage. 
+  downsample: "merging"
+  # This specifies the module used for downsampling. Applied after each swin block. Should one of
+  # "merging"           - Only accepts 5D objects. 
+  # "mergingv2"         - Accepts 4D and 5D. 
+  use_v2: False # If true, adds a conv block at the beginning of each swin transformer stage. 
+  mlp_ratio: 4 # The dimention of the FFN applied after self-attention is feature_size * mlp_ratio
+  qkv_bias: True # Whether to add a bias term to KVQ transformations. 
+  patch_size: 2 # The cubic patch side length to be used. Increasing this decreases the number of tokens. Do not change yet, causes crashes if larger than 2. 
+  window_size: 3 # The side length of Swin windows in # of patches. | Try to change the window size 4+1 | 4-1
+
+training:
+  val_fold: 1
+  max_epochs: 200
+  save_checkpoints: True
+  save_images_per_batch: 12
+  weight_decay: 1e-3
+  lr: 1e-2
+  sw_batch_size: 2 # "sliding window" batch size | Try 3-1 and 3+1
+  batch_size: 3
+  val_batch_size: 2
+  accumulate_grad_batches: 2 # the total images in a backpropagation weights update will be (accumulate_grad_batches * batch_size * number_of_GPUs)
+  limit_val_batches: 1.0 # If this is a fraction, that percentage of the validation data will be used for a given validation run. If this is an integer, that's how many validation batches to run. If this is -1, then all validation images will be run each time.
+  val_check_interval: 1.0 # A value of 0.2 would mean that the validation is run 5 times per epoch (1 / 0.2 = 5). A value of 3 would run the validation set once every 3 training batches. A value of 1.0 is standard.
+  check_val_every_n_epoch: 5 # A value of 4 here, with a value of val_check_interval = 0.2 would mean that for 3 epochs, no validation is run at all. Then, during the fourth epoch, the validation is run 5 different times. Then, the next 3 epochs will have no validations run.
+  train_resize: [256, 256, 128] # If not none, resizes the training data to [h, w, d] before doing cropping to the ROI. 
+  val_resize: [256, 256, 128]
+  num_sanity_val_steps: 1 # Sanity check n validation batches before training. Default: 2
+
+data:
+  workers: 3 # Number of training DataLoader workers.
+  val_workers: 3 # Number of validation DataLoader workers. Setting to 0 runs it on the same process. 
+  dataset:
+    type: "PartitionedPersistentDataset" 
+    # The type of dataset: 
+    # PersistentDataset:            Only cache deterministic transforms. Generally inefficient
+    # RandomPersistentDataset:      Also cache random transforms. Does not generalize as well, but very efficient
+    # PartitionedPersistentDataset: Cache N (num_partitions) differently seeded random transforms. Epoch i will use cache i % N. 
+    num_partitions: 3
+  label_union: True # take the union of all the labels in addition to each label separately
