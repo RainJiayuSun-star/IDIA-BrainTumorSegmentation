@@ -6,3 +6,6 @@ outputs/
 
 # Ignore ipynb_checkpoints
 .ipynb_checkpoints/
+
+# ignore model checkpoints
+brain_model_train/data/model_checkpoints/4-17-17
