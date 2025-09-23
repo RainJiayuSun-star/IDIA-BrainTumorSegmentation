@@ -1,0 +1,15 @@
+input:
+  single_scan:            # For a single scan, define the locations of all .nii.gz modalities relative to data_dir. 
+    flair:        "Patient-007_FLAIR_SRI24.nii.gz"
+    t1c:          "Patient-007_CT1_SRI24.nii.gz"
+    t1:           "Patient-007_T1_SRI24.nii.gz"
+    t2:           "Patient-007_T2_SRI24.nii.gz"
+  data_dir:       "/app/Data/_Brain/Radiology/_Adult/_Glioma/LUMIERE/Preprocessed/Patient-007/time_point_10" # The directory where input scans are located. 
+
+output:                   # File path to the output inference. 
+  file_path: "/app/Data/_Brain/Radiology/_Adult/_Glioma/LUMIERE/Preprocessed/Patient-007/time_point_10/out_SwinUNETR.nii.gz"
+
+model:                    # AWS S3 details for retrieving the model. 
+  bucket:            "theta-trained-models"
+  key:               "glioblastoma.ckpt"
+  region:            "us-east-1"

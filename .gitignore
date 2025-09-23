@@ -1,0 +1,8 @@
+# Ignore the patients data folder in segmentation
+brain_model_train/data/patients/
+
+# Ignore the data output folder
+outputs/
+
+# Ignore ipynb_checkpoints
+.ipynb_checkpoints/

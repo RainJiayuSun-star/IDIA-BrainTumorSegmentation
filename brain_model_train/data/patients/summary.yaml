@@ -1,20 +1,19 @@
 affine_issues:
   UCSF:
-    equal: 297
+    equal: 298
     fixed: 0
     skipped: 0
 dataset_stats:
   UCSF:
-    patients_missing_label: 1
+    patients_missing_label: 0
     patients_missing_modalities: 0
-    patients_with_data: 297
+    patients_with_data: 298
 missing_data:
   UCSF:
-    label:
-    - '100302'
+    label: []
     modalities: []
 summary_stats:
   total_datasets: 1
-  total_patients_missing_label: 1
+  total_patients_missing_label: 0
   total_patients_missing_modalities: 0
-  total_patients_with_data: 297
+  total_patients_with_data: 298

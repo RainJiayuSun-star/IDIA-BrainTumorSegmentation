@@ -1,0 +1,21 @@
+input:
+  compute_dice:   False                     # Whether to compute dice scores. Requires scans to have a label/ground_truth. 
+  mode:           "multi"                  # Optional. Whether to load multiple scans from a list, or to infer on a single scan. Either 'single' or 'multi'.
+  multi_scan:                       
+    scan_list:    "data/multi_example2.json" # Loads a json list of scans to perform inference on. 
+  
+  single_scan:                              # For a single scan, define the locations of all .nii.gz modalities relative to data_dir. 
+    ground_truth: "100001/100001_time1_seg.nii.gz" # Only required if compute_dice is True. 
+    flair:        "100001/100001_time1_flair.nii.gz"
+    t1c:          "100001/100001_time1_t1ce.nii.gz"
+    t1:           "100001/100001_time1_t1.nii.gz"
+    t2:           "100001/100001_time1_t2.nii.gz"
+  data_dir:       "/mnt/d/A1_RainSun_20240916/1-UWMadison/IDiA-Lab/Tasks/tumor_seg/tumor_seg/data/Preprocessed"                   # The directory where input scans are located. 
+
+output:                                     # File path to the output inference. 
+  file_path:      "/mnt/d/A1_RainSun_20240916/1-UWMadison/IDiA-Lab/Tasks/tumor_seg/tumor_seg/data/out_seg.nii.gz"
+
+model:                                      # AWS S3 details for retrieving the model. 
+  bucket:         "theta-trained-models"
+  key:            "model.ckpt"
+  region:         "us-east-1"

@@ -1,9 +1,9 @@
-data_root: '/app/train/trainMain/data/UCSF-POST/'
+data_root: '/mnt/d/A1_RainSun_20240916/1-UWMadison/IDiA-Lab/Tasks/'
 folds: 5
 
 datasets:
   UCSF:
-    base_path: 'Preprocessed/'
+    base_path: 'UCSF_POSTOP_GLIOMA_DATASET_FINAL_v1.0/'
     patient_pattern: '100[0-9][0-9][0-9]'
     label_pattern: '{patient}_time1_seg.nii.gz'
     image_patterns:
